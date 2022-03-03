@@ -55,6 +55,7 @@
               image: ami-092cce4a19b438926
               wait: yes
               count: 1
+              user_data: build.start.sh
               assign_public_ip: yes
             register: output
           - name: print
