@@ -26,7 +26,7 @@
             - proto: all
               cidr_ip: 0.0.0.0/0
 
-tasks:
+  tasks:
     - name: create security group 2
         ec2_group:
           name: Allow-In-22-8080
@@ -44,9 +44,18 @@ tasks:
           rules_egress:
             - proto: all
               cidr_ip: 0.0.0.0/0
-
   
+  tasks:
+    - name: Launch EC2 Instance 1 (Build)
+        ec2:
+          key_name: key-1
+          instance_type: t3.micro
+          image: ami-092cce4a19b438926
+          wait: no
+          group: Allow-In-22
+          count: 1
+          instance_initiated_shutdown_behavior: terminate
 
 
 
-        
+
