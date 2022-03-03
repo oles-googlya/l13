@@ -26,7 +26,6 @@
             - proto: all
               cidr_ip: 0.0.0.0/0
 
-  tasks:
     - name: create security group 2
         ec2_group:
           name: Allow-In-22-8080
@@ -45,7 +44,6 @@
             - proto: all
               cidr_ip: 0.0.0.0/0
   
-  tasks:
     - name: Launch EC2 Instance 1 (Build)
         ec2:
               key_name: key-1
@@ -65,6 +63,23 @@
             add_host:
               name: "{{ output.instances[0].public_ip }}"
               groups: build
+
+- name: Artifact generation
+  hosts: build
+  become: yes
+
+  tasks:
+  - name: Cloning the repo
+    git: 
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /home/user/boxfuse-sample-java-war-hello
+      clone: yes
+      update: yes
+    
+  - name: Artifact generation
+    command: mvn package
+    args:
+        chdir: /home/user/boxfuse-sample-java-war-hello/
 
 
 
