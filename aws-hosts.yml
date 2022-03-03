@@ -30,7 +30,7 @@
     - name: create security group 2
         ec2_group:
           name: Allow-In-22-8080
-          description: Open port 22 and 8080 in
+          description: Open ports 22 and 8080 in
           region: eu-north-1
           rules:
             - proto: tcp
@@ -48,13 +48,22 @@
   tasks:
     - name: Launch EC2 Instance 1 (Build)
         ec2:
-          key_name: key-1
-          instance_type: t3.micro
-          image: ami-092cce4a19b438926
-          wait: no
-          group: Allow-In-22
-          count: 1
-          instance_initiated_shutdown_behavior: terminate
+              key_name: key-1
+              region: eu-north-1
+              group: Allow-In-22
+              instance_type: t3.micro
+              image: ami-092cce4a19b438926
+              wait: yes
+              count: 1
+              assign_public_ip: yes
+            register: output
+          - name: print
+            debug:
+              var: output.instances[0].public_ip
+          - name: update inventory
+            add_host:
+              name: "{{ output.instances[0].public_ip }}"
+              groups: build
 
 
 
