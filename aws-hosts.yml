@@ -1,6 +1,7 @@
 ---
 - name: prepare aws cloud
   hosts: localhost
+  vars: 
   
   tasks:
     - name: create a new ec2 key pair
@@ -75,7 +76,14 @@
     args:
         chdir: /home/user/boxfuse-sample-java-war-hello/
   
-  - 
+  - name: put artifact to backet
+    amazon.aws.aws_s3:
+      aws_access_key: "{{aws_access_key}}"
+      aws_secret_key: "{{aws_secret_key}}"
+      bucket: mybacket29s.test5.com
+      object: hello.war
+      src:  /srv/boxfuse/target/hello-1.0.war
+      mode: put
 
 
 
