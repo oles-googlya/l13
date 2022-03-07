@@ -11,7 +11,6 @@
      - name: Save private key
       copy: content="{{ ec2_key_result.key.private_key }}" dest=".ssh/id_rsa" mode=0600
   
-  tasks:
     - name: create security group 1
         ec2_group:
           name: Allow-In-22
@@ -19,13 +18,11 @@
           region: eu-north-1
           rules:
             - proto: tcp
-              from_port: 22
-              to_port: 22
+              ports: 
+              - 22
               cidr_ip: 0.0.0.0/0
-          rules_egress:
-            - proto: all
-              cidr_ip: 0.0.0.0/0
-
+              rule_desc: allow all on port 22 only
+          
     - name: create security group 2
         ec2_group:
           name: Allow-In-22-8080
@@ -33,16 +30,11 @@
           region: eu-north-1
           rules:
             - proto: tcp
-              from_port: 22
-              to_port: 22
+              ports: 
+              - 22
+              - 8080
               cidr_ip: 0.0.0.0/0
-            - proto: tcp
-              from_port: 8080
-              to_port: 8080
-              cidr_ip: 0.0.0.0/0  
-          rules_egress:
-            - proto: all
-              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 22 & 8080
   
     - name: Launch EC2 Instance 1 (Build)
         ec2:
