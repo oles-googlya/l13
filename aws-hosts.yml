@@ -59,6 +59,7 @@
 
 - name: Artifact generation
   hosts: build
+  remote_user: ubuntu
   become: yes
 
   tasks:
@@ -73,6 +74,8 @@
     command: mvn package
     args:
         chdir: /home/user/boxfuse-sample-java-war-hello/
+  
+  - 
 
 
 
