@@ -46,7 +46,7 @@
               wait: yes
               count: 1
               user_data: build.start.sh
-              vpc_subnet_id: 
+              vpc_subnet_id: subnet-00d6ea264a155d172
               assign_public_ip: yes
             register: output
           - name: print
