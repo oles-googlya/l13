@@ -1,13 +1,13 @@
 ---
-- name: prepare cloud
+- name: prepare aws cloud
   hosts: localhost
-  connection: local
-  gather_facts: False
+  
   tasks:
     - name: create a new ec2 key pair
       ec2_key:
         name: key-1
         region: eu-north-1
+      register: ec2_key_result
      - name: Save private key
       copy: content="{{ ec2_key_result.key.private_key }}" dest=".ssh/id_rsa" mode=0600
   
