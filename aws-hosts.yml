@@ -1,7 +1,8 @@
 ---
 - name: prepare aws cloud
   hosts: localhost
-  vars: 
+  vars_files:
+    - vars.yml
   
   tasks:
     - name: create a new ec2 key pair
@@ -75,16 +76,20 @@
     command: mvn package
     args:
         chdir: /home/user/boxfuse-sample-java-war-hello/
+
+  - name: creaste backet
+    amazon.aws.aws_s3:
+      aws_access_key: "{{aws_access_key}}"
+      aws_secret_key: "{{aws_secret_key}}"
+      bucket: wonderbacket.647524
+      mode: create
+      permission: public-read
   
   - name: put artifact to backet
     amazon.aws.aws_s3:
       aws_access_key: "{{aws_access_key}}"
       aws_secret_key: "{{aws_secret_key}}"
-      bucket: mybacket29s.test5.com
+      bucket: wonderbacket.647524
       object: hello.war
       src:  /srv/boxfuse/target/hello-1.0.war
       mode: put
-
-
-
-
