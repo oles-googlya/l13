@@ -44,14 +44,14 @@
     - name: Launch EC2 Instance 1 (Build)
       ec2:
         key_name: key-1
-        region: eu-north-1
+        region: us-east-1
         group: Allow-In-22
-        instance_type: t3.micro
-        image: ami-092cce4a19b438926
+        instance_type: t2.micro
+        image: ami-04505e74c0741db8d
         wait: yes
         count: 1
         user_data: build.start.sh
-        vpc_subnet_id: subnet-00d6ea264a155d172
+        vpc_subnet_id: subnet-02e67977e95532821
         assign_public_ip: yes
       register: output
     - name: print
