@@ -66,6 +66,7 @@
   hosts: build
   remote_user: ubuntu
   become: yes
+  become_user: root
 
   tasks:
   - name: Cloning the repo
