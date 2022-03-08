@@ -77,7 +77,7 @@
     args:
         chdir: /home/user/boxfuse-sample-java-war-hello/
 
-  - name: creaste backet
+  - name: create backet
     amazon.aws.aws_s3:
       aws_access_key: "{{aws_access_key}}"
       aws_secret_key: "{{aws_secret_key}}"
