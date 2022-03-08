@@ -8,7 +8,7 @@
     - name: create a new ec2 key pair
       ec2_key:
         name: key-1
-        region: eu-north-1
+        region: us-east-1
       register: ec2_key_result
     - name: print
       debug:
@@ -20,7 +20,7 @@
       ec2_group:
         name: Allow-In-22
         description: Open port 22 in
-        region: eu-north-1
+        region: us-east-1
         rules:
           - proto: tcp
             ports: 
@@ -32,7 +32,7 @@
       ec2_group:
         name: Allow-In-22-8080
         description: Open ports 22 and 8080 in
-        region: eu-north-1
+        region: us-east-1
         rules:
           - proto: tcp
             ports: 
