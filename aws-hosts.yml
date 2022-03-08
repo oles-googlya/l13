@@ -51,9 +51,9 @@
         vpc_subnet_id: subnet-00d6ea264a155d172
         assign_public_ip: yes
       register: output
-      - name: print
-        debug:
-          var: output.instances[0].public_ip
+    - name: print
+      debug:
+        var: output.instances[0].public_ip
     - name: update inventory
       add_host:
         name: "{{ output.instances[0].public_ip }}"
