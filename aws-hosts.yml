@@ -50,9 +50,6 @@
         image: ami-04505e74c0741db8d
         wait: yes
         count: 1
-        user_data: |
-                    #!/bin/sh
-                    sudo apt-get update && sudo apt-get install default-jdk -y && sudo apt-get install maven -y
         vpc_subnet_id: subnet-02e67977e95532821
         assign_public_ip: yes
       register: output
@@ -64,11 +61,34 @@
         name: "{{ output.instances[0].public_ip }}"
         groups: build
 
-- name: Artifact generation
+- name: Pause for 5 minutes
+  pause:
+    minutes: 5
+
+- name: Work on build host
   hosts: build
   remote_user: ubuntu
   become: yes
   become_user: root
+
+  tasks:
+  - name: Ensure jdk is present
+    apt:
+      name: default-jdk
+      state: present
+      update_cache: yes
+
+  - name: Ensure maven is present
+    apt:
+      name: maven
+      state: present
+      update_cache: yes
+  
+  - name: Ensure git is present
+    apt:
+      name: git
+      state: present
+      update_cache: yes  
 
   tasks:
   - name: Cloning the repo
