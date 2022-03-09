@@ -63,7 +63,7 @@
 
     - name: Pause for 5 minutes
       pause:
-      minutes: 5
+        minutes: 5
 
 - name: Work on build host
   hosts: build
