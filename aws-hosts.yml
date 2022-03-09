@@ -61,9 +61,9 @@
         name: "{{ output.instances[0].public_ip }}"
         groups: build
 
-- name: Pause for 5 minutes
-  pause:
-    minutes: 5
+    - name: Pause for 5 minutes
+      pause:
+      minutes: 5
 
 - name: Work on build host
   hosts: build
