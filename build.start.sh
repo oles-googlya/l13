@@ -1,4 +1,5 @@
-sudo apt update
-sudo apt install default-jdk
-sudo apt install git
-sudo apt install maven
+#!/bin/sh
+sudo apt-get update
+sudo apt-get install default-jdk -y
+sudo apt-get install git -y
+sudo apt-get install maven -y
