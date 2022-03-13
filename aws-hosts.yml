@@ -94,14 +94,14 @@
   - name: Cloning the repo
     git: 
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/user/boxfuse-sample-java-war-hello
+      dest: /home/ubuntu/boxfuse-sample-java-war-hello
       clone: yes
       update: yes
     
   - name: Artifact generation
     command: mvn package
     args:
-        chdir: /home/user/boxfuse-sample-java-war-hello/
+        chdir: /home/ubuntu/boxfuse-sample-java-war-hello/
 
   - name: create backet
     amazon.aws.aws_s3:
