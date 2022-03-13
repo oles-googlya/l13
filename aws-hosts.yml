@@ -61,10 +61,10 @@
         name: "{{ output.instances[0].public_ip }}"
         groups: build
 
-    - name: Pause for 5 minutes
-      pause:
-        minutes: 5
-
+    - name: Sleep for 300 seconds and continue with play
+    wait_for:
+      timeout: 300
+    
 - name: Work on build host
   hosts: build
   remote_user: ubuntu
