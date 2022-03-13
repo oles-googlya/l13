@@ -50,6 +50,7 @@
         image: ami-04505e74c0741db8d
         wait: yes
         count: 1
+        user_data: build.start.sh
         vpc_subnet_id: subnet-02e67977e95532821
         assign_public_ip: yes
       register: output
