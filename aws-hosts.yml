@@ -50,7 +50,6 @@
         image: ami-04505e74c0741db8d
         wait: yes
         count: 1
-        user_data: "{{ lookup('file', 'build.start.sh') }}"
         vpc_subnet_id: subnet-02e67977e95532821
         assign_public_ip: yes
       register: output
@@ -62,9 +61,12 @@
         name: "{{ output.instances[0].public_ip }}"
         groups: build
 
-    - name: Sleep for 300 seconds and continue with play
+    - name: Wait for SSH to come up
       wait_for:
-        timeout: 300
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        state: started
+      loop: "{{ output.instances }}"
     
 - name: Work on build host
   hosts: build
